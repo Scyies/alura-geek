@@ -10,12 +10,12 @@ import { Link } from "react-router-dom";
 export default function Header() {
   const [openSearch, setOpenSearch] = useState<boolean>(false);
   return (
-    <header className="m-4 md:mx-8 flex items-center justify-between">
+    <header className="m-4 md:mx-8 lg:mx-36 flex items-center justify-between">
       <Link to={"/"}>
         <img
           src={openSearch ? cLogo : Logo}
           alt=""
-          className={classNames("max-w-[100px] order-1", {
+          className={classNames("max-w-[100px] order-1 md:max-w-[130px] lg:max-w-[170px]", {
             "max-w-[40px]": openSearch === true,
           })}
         />
@@ -30,7 +30,7 @@ export default function Header() {
         </Link>
       </div>
       <div
-        className={classNames("flex order-3 md:order-2 items-center", {
+        className={classNames("flex order-3 md:order-2 items-center md:min-w-[270px] lg:min-w-[400px]", {
           "md:rounded-full md:bg-black/10 md:shadow-md":
             openSearch === false,
           "rounded-full bg-black/10 shadow-md my-1 self-end":

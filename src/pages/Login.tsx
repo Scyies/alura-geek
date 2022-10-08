@@ -7,9 +7,9 @@ import Input from '../components/Input'
 export default function Login() {
   return (
     <>
-    <main className='flex flex-col text-center bg-black/10 p-4 py-16'>
-      <h1 className="text-gray font-bold text-base mb-4">Iniciar Sessão</h1>
-      <form className='flex flex-col gap-4 mx-6 md:max-w-[275px] md:w-full md:mx-auto'>
+    <main className='flex flex-col text-center min-h-[50vh] bg-black/10 p-4 py-16'>
+      <h1 className="text-gray font-bold text-base lg:text-lg mb-4">Iniciar Sessão</h1>
+      <form className='flex flex-col gap-4 mx-6 md:max-w-[275px] lg:max-w-[420px] md:w-full md:mx-auto'>
         <Input placeholder='Escreva seu email' />
         <Input placeholder='Escreva sua senha' />
         <div className='self-center'>

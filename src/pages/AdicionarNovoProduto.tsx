@@ -7,9 +7,9 @@ import InputWLabel from "../components/InputWLabel";
 export default function AdicionarNovoProduto() {
   return (
     <>
-      <main className="bg-black/10 p-4 md:p-8">
-        <form action="" className="flex flex-col gap-4 ">
-          <h1 className="text-gray font-bold text-xl">Adicionar novo produto</h1>
+      <main className="bg-black/10 p-4 md:p-8 lg:py-12">
+        <form action="" className="flex flex-col gap-4 lg:max-w-xl lg:mx-auto">
+          <h1 className="text-gray font-bold text-xl lg:text-3xl">Adicionar novo produto</h1>
           <InputWLabel label="URL da imagem" />
           <InputWLabel label="Nome do produto" />
           <InputWLabel label="Preço do produto" />
