@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AdminCard from "../components/AdminCard";
 import Button from "../components/Button";
 import Footer from "../components/Footer";
@@ -11,11 +12,11 @@ export default function AdminProductList() {
   return (
     <>
       <main className="bg-black/10 p-8 lg:px-36">
-        <div className="flex flex-col md:flex-row md:justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:justify-between items-center gap-4">
           <h1 className="text-gray font-bold text-xl">Todos os produtos</h1>
-          <div>
+          <Link to={"/admin/add-new-product"}>
             <Button variant="secondary">Adicionar produto</Button>
-          </div>
+          </Link>
         </div>
         <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 my-4">
           {data?.map((produto) => (

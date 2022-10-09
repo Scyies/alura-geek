@@ -6,7 +6,7 @@ export default function Footer() {
       <p className="font-medium text-gray text-base">
         Desenvolvido por Sérgio Valério
       </p>
-      <p className="font-medium text-gray text-base">2021</p>
+      <p className="font-medium text-gray text-base">2022</p>
     </footer>
   );
 }
