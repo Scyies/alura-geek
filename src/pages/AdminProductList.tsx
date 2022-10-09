@@ -14,7 +14,7 @@ export default function AdminProductList() {
       <main className="bg-black/10 p-8 lg:px-36">
         <div className="flex flex-col md:flex-row md:justify-between items-center gap-4">
           <h1 className="text-gray font-bold text-xl">Todos os produtos</h1>
-          <Link to={"/admin/add-new-product"}>
+          <Link to={"/admin/new-product"}>
             <Button variant="secondary">Adicionar produto</Button>
           </Link>
         </div>

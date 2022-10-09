@@ -12,7 +12,7 @@ export default function DescricaoProduto() {
   const productId = useParams()
   const similarCategory = descriptionProduct?.row
   
-  async function getMainProduct(id: string) {
+  async function getMainProduct(id: number) {
     const res = await axios.get(`http://localhost:5555/produtos/${id}`)
     setDescriptionProduct(res.data);
   }
@@ -21,14 +21,19 @@ export default function DescricaoProduto() {
     setSimilarProducts(res.data);
   }
 
+  console.log(productId.id);
+  console.log(similarCategory);
+
+  console.log(descriptionProduct);
+
   useEffect(() => {
     if(productId.id) {
-      getMainProduct(productId.id);
+      getMainProduct(Number(productId.id));
     };
     if(similarCategory) {
       getSimilarProdutcs(similarCategory)
     };
-  }, [productId, similarCategory])
+  }, [productId.id, similarCategory])
   return (
     <>
       <section className="bg-black/10 flex flex-col lg:py-16">

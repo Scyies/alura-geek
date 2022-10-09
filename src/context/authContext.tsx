@@ -21,13 +21,21 @@ export default function authContext({ children }: any) {
   }
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser: any) => {
-      setUser(currentUser);
+    const authState = onAuthStateChanged(auth, (currentUser: any) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser("");
+      }
     });
+    // const unSubscribe = onAuthStateChanged(auth, (currentUser: any) => {
+    //   setUser(currentUser);
+    // });
     return () => {
-      unSubscribe();
+      authState()
+      // unSubscribe();
     };
-  }, []);
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, logIn, logOut }}>
