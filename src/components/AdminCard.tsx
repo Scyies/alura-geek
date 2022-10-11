@@ -13,7 +13,7 @@ export default function AdminCard({ imagem, nome, preco, id }: IData) {
   async function deleteProduct(id: number) {
     try {
       await axios
-        .delete(`http://localhost:5555/produtos/delete/${id}`)
+        .delete(`https://alura-geek-server.vercel.app/produtos/delete/${id}`)
         .then(() => {
           toast.success('Produto excluído com sucesso!');
         });
