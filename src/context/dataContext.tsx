@@ -8,7 +8,7 @@ export default function dataContext({ children }: any) {
   const [data, setData] = useState<IData[] | undefined>();
 
   async function getData() {
-    const response = await axios.get("http://localhost:5555/produtos");
+    const response = await axios.get("https://alura-geek-server.vercel.app/produtos");
     setData(response.data);
   }
 
