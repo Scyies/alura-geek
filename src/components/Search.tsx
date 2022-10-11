@@ -24,7 +24,9 @@ export default function Search({ filter }: ISearch) {
   return (
     <main className='p-4 md:p-8 lg:px-36 bg-black/10 min-h-screen'>
       <div className='flex items-center justify-between'>
-        <h2 className='text-gray font-bold text-xl'>Resultado da pesquisa</h2>
+        <h2 className='text-gray font-bold text-xl'>
+          Resultado da pesquisa sobre "{filter}"
+        </h2>
       </div>
       <section className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 my-4'>
         {displayData &&
