@@ -2,15 +2,26 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-} from "firebase/auth";
-import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../auth/firebaseAuth";
-import { IAuthContext } from "../types/dataTypes";
+  UserInfo,
+} from 'firebase/auth';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { auth } from '../auth/firebaseAuth';
+import { IAuthContext } from '../types/dataTypes';
 
 const AuthContext = createContext<IAuthContext>({});
 
-export default function authContext({ children }: any) {
-  const [user, setUser] = useState("");
+interface IProps {
+  children: ReactNode;
+}
+
+export default function authContext({ children }: IProps) {
+  const [user, setUser] = useState<UserInfo>();
 
   function logIn(email: string, password: string) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -21,19 +32,19 @@ export default function authContext({ children }: any) {
   }
 
   useEffect(() => {
-    const authState = onAuthStateChanged(auth, (currentUser: any) => {
+    const authState = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
       } else {
-        setUser("");
+        setUser(undefined);
       }
     });
-    // const unSubscribe = onAuthStateChanged(auth, (currentUser: any) => {
-    //   setUser(currentUser);
-    // });
+    const unSubscribe = onAuthStateChanged(auth, (currentUser: any) => {
+      setUser(currentUser);
+    });
     return () => {
-      authState()
-      // unSubscribe();
+      authState();
+      unSubscribe();
     };
   }, [user]);
 

@@ -1,4 +1,4 @@
-import { UserCredential } from 'firebase/auth';
+import { UserCredential, UserInfo } from 'firebase/auth';
 
 export interface IData {
   descricao?: string;
@@ -12,10 +12,13 @@ export interface IData {
 export interface IDataContextType {
   data: IData[] | undefined;
   setData: React.Dispatch<React.SetStateAction<IData[] | undefined>>;
+  diversosProducts: IData[] | undefined;
+  starWarsProducts: IData[] | undefined;
+  consolesProducts: IData[] | undefined;
 }
 
 export interface IAuthContext {
-  user?: string;
+  user?: UserInfo;
   logIn?: (email: string, password: string) => Promise<UserCredential>;
   logOut?: () => Promise<void>;
 }

@@ -39,8 +39,6 @@ export default function AdicionarNovoProduto() {
 
     if (!input) return;
 
-    console.log(input);
-
     const collectionRef = collection(db, 'produtos');
 
     try {
@@ -49,7 +47,7 @@ export default function AdicionarNovoProduto() {
         descricao: String(input.descricao),
         imagem: String(input.imagem),
         preco: String(input.preco),
-        row: Number(input.row),
+        row: Number(selector),
         id: v4(),
       });
       toast.success('Produto editado com sucesso!');
@@ -75,7 +73,7 @@ export default function AdicionarNovoProduto() {
         descricao: String(input.descricao),
         imagem: String(input.imagem),
         preco: String(input.preco),
-        row: Number(input.row),
+        row: Number(selector),
       };
       await updateDoc(docRef, updatedPost);
       toast.success('Produto editado com sucesso!');
@@ -96,7 +94,7 @@ export default function AdicionarNovoProduto() {
     <>
       <main className='bg-black/10 p-4 md:p-8 lg:py-12'>
         <form
-          onSubmit={!productId ? handleNewProduct : handleEditProduct}
+          onSubmit={!productId.id ? handleNewProduct : handleEditProduct}
           className='flex flex-col gap-4 lg:max-w-xl lg:mx-auto'
         >
           <h1 className='text-gray font-bold text-xl lg:text-3xl'>

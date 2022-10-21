@@ -13,7 +13,7 @@ export default function Hero() {
           <p className='font-semibold text-sm md:text-xl text-white mb-2'>
             Produtos selecionados com 33% de desconto
           </p>
-          <Link to='/description/10'>
+          <Link to='/description/8a2101yUOUoolRP031yj'>
             <Button variant='secondary'>Ver Consoles</Button>
           </Link>
         </div>

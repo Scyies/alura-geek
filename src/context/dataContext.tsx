@@ -1,11 +1,10 @@
-import React, {
+import {
   createContext,
   ReactNode,
   useContext,
   useEffect,
   useState,
 } from 'react';
-import axios from 'axios';
 import { IData, IDataContextType } from '../types/dataTypes';
 import { db } from '../auth/firebaseAuth';
 import { collection, onSnapshot, query } from 'firebase/firestore';
@@ -30,13 +29,23 @@ export default function dataContext({ children }: IProps) {
     return unsubscribe;
   }
 
-  console.log(data);
+  const starWarsProducts = data?.filter((product) => product.row == 1);
+  const consolesProducts = data?.filter((product) => product.row == 2);
+  const diversosProducts = data?.filter((product) => product.row == 3);
 
   useEffect(() => {
     getProducts();
   }, []);
   return (
-    <DataContext.Provider value={{ data, setData }}>
+    <DataContext.Provider
+      value={{
+        data,
+        setData,
+        starWarsProducts,
+        consolesProducts,
+        diversosProducts,
+      }}
+    >
       {children}
     </DataContext.Provider>
   );
