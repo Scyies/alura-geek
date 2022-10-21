@@ -17,6 +17,7 @@ interface IProps {
 
 export default function dataContext({ children }: IProps) {
   const [data, setData] = useState<IData[]>();
+  const [cartItems, setCartItems] = useState<IData[]>([]);
 
   async function getProducts() {
     const collectionRef = collection(db, 'produtos');
@@ -44,6 +45,8 @@ export default function dataContext({ children }: IProps) {
         starWarsProducts,
         consolesProducts,
         diversosProducts,
+        cartItems,
+        setCartItems,
       }}
     >
       {children}

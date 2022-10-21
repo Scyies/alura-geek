@@ -15,6 +15,8 @@ export interface IDataContextType {
   diversosProducts: IData[] | undefined;
   starWarsProducts: IData[] | undefined;
   consolesProducts: IData[] | undefined;
+  cartItems: IData[];
+  setCartItems: React.Dispatch<React.SetStateAction<IData[]>>;
 }
 
 export interface IAuthContext {

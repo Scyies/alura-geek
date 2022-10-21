@@ -10,7 +10,7 @@ export default function Hero() {
           Dezembro Promocional
         </h1>
         <div>
-          <p className='font-semibold text-sm md:text-xl text-white mb-2'>
+          <p className='font-semibold text-sm md:text-xl text-white mb-2 pr-2'>
             Produtos selecionados com 33% de desconto
           </p>
           <Link to='/description/8a2101yUOUoolRP031yj'>

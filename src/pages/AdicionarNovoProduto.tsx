@@ -10,8 +10,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { db } from '../auth/firebaseAuth';
 import Button from '../components/Button';
-import Footer from '../components/Footer';
-import Info from '../components/Info';
 import InputWLabel from '../components/InputWLabel';
 import { IData } from '../types/dataTypes';
 import { v4 } from 'uuid';
@@ -146,8 +144,6 @@ export default function AdicionarNovoProduto() {
           </Button>
         </form>
       </main>
-      <Info />
-      <Footer />
     </>
   );
 }

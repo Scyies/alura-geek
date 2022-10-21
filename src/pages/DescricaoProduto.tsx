@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import Footer from '../components/Footer';
-import Info from '../components/Info';
 import { useParams } from 'react-router-dom';
 import { IData } from '../types/dataTypes';
 import Card from '../components/Card';
@@ -41,13 +39,13 @@ export default function DescricaoProduto() {
   return (
     <>
       <section className='bg-black/10 flex flex-col lg:py-16'>
-        <div className='grid grid-cols-3 md:flex-row md:m-8 lg:mx-36 items-center'>
+        <div className='md:grid md:grid-cols-3 md:flex-row md:m-8 lg:mx-36 items-center'>
           <img
             src={descriptionProduct?.imagem}
             alt=''
             className='max-h-[190px] md:max-h-[250px] w-full lg:max-w-2xl object-cover rounded'
           />
-          <div className='m-4 text-gray flex flex-col gap-2 lg:justify-center col-span-2'>
+          <div className='m-4 text-gray flex flex-col gap-2 lg:justify-center md:col-span-2'>
             <h2 className='font-medium text-xl lg:text-5xl'>
               {descriptionProduct?.nome}
             </h2>
@@ -74,8 +72,6 @@ export default function DescricaoProduto() {
           </div>
         </div>
       </section>
-      <Info />
-      <Footer />
     </>
   );
 }

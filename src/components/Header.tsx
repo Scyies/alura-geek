@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Logo from '../assets/Logo.svg';
 import Lupa from '../assets/Lupa.svg';
 import Button from './Button';
@@ -7,13 +7,20 @@ import classNames from 'classnames';
 import cLogo from '../assets/control_logo.svg';
 import { Link, Outlet } from 'react-router-dom';
 import { useUserAuth } from '../context/authContext';
-import { SignOut, User } from 'phosphor-react';
+import { ShoppingCartSimple, SignOut, User } from 'phosphor-react';
 import Search from './Search';
+import Footer from './Footer';
+import Info from './Info';
+import CartAside from './CartAside';
+import { useData } from '../context/dataContext';
+import { IDataContextType } from '../types/dataTypes';
 
 export default function Header() {
   const [openSearch, setOpenSearch] = useState<boolean>(false);
   const [search, setSearch] = useState('');
   const { user, logOut } = useUserAuth();
+  const [cartOpen, setCartOpen] = useState(false);
+  const { cartItems } = useData() as IDataContextType;
 
   return (
     <>
@@ -23,9 +30,9 @@ export default function Header() {
             src={openSearch ? cLogo : Logo}
             alt=''
             className={classNames(
-              'max-w-[100px] order-1 md:max-w-[130px] lg:max-w-[170px]',
+              'order-1 max-h-[30px] md:max-h-[40px] lg:max-h-[60px]',
               {
-                'max-w-[40px]': openSearch === true,
+                'max-w-[30px]': openSearch === true,
               }
             )}
           />
@@ -41,6 +48,17 @@ export default function Header() {
             </Link>
           ) : (
             <div className='flex gap-2'>
+              <div
+                className='relative cursor-pointer'
+                onClick={() => setCartOpen(!cartOpen)}
+              >
+                <span className='text-blue'>
+                  <ShoppingCartSimple size={24} weight='bold' />
+                </span>
+                <span className='absolute -bottom-3 -right-1 flex items-center px-1 aspect-square bg-blue rounded-full text-white text-xs'>
+                  {cartItems.length}
+                </span>
+              </div>
               <Link to={'/admin/product-list'}>
                 <span className='text-blue'>
                   <User size={24} weight='bold' />
@@ -62,15 +80,15 @@ export default function Header() {
             'flex order-3 md:order-2 items-center md:min-w-[270px] lg:min-w-[400px]',
             {
               'md:rounded-full md:bg-black/10': openSearch === false,
-              'rounded-full bg-black/10 my-1 self-end': openSearch === true,
+              'rounded-full bg-black/10 self-end': openSearch === true,
             }
           )}
         >
           <Input
             className={classNames(
-              'bg-black/0 outline-none self-center rounded-full py-2 px-3',
+              'bg-transparent outline-none self-center rounded-full py-2 px-3',
               {
-                'w-0 md:w-full': openSearch === false,
+                'w-0 md:w-full ': openSearch === false,
               }
             )}
             placeholder='O que deseja encontrar?'
@@ -85,7 +103,10 @@ export default function Header() {
           />
         </div>
       </header>
+      <CartAside cartState={cartOpen} />
       {search.length > 0 ? <Search filter={search} /> : <Outlet />}
+      <Info />
+      <Footer />
     </>
   );
 }
