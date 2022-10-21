@@ -3,8 +3,9 @@ import Footer from '../components/Footer';
 import Info from '../components/Info';
 import { useParams } from 'react-router-dom';
 import { IData } from '../types/dataTypes';
-import axios from 'axios';
 import Card from '../components/Card';
+import { collection, doc, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '../auth/firebaseAuth';
 
 export default function DescricaoProduto() {
   const [descriptionProduct, setDescriptionProduct] = useState<IData>();
@@ -12,22 +13,26 @@ export default function DescricaoProduto() {
   const productId = useParams();
   const similarCategory = descriptionProduct?.row;
 
-  async function getMainProduct(id: number) {
-    const res = await axios.get(
-      `https://alura-geek-server.vercel.app/produtos/${id}`
+  async function getMainProduct(productId: string) {
+    const docRef = doc(db, 'produtos', productId);
+    const unsubscribe = onSnapshot(docRef, (snapshot) =>
+      setDescriptionProduct(snapshot.data() as IData)
     );
-    setDescriptionProduct(res.data);
+    return unsubscribe;
   }
   async function getSimilarProdutcs(row: number) {
-    const res = await axios.get(
-      `https://alura-geek-server.vercel.app/produtos/relacionados/${row}`
-    );
-    setSimilarProducts(res.data);
+    const q = query(collection(db, 'produtos'), where('row', '==', row));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setSimilarProducts(
+        snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id } as IData))
+      );
+    });
+    return unsubscribe;
   }
 
   useEffect(() => {
     if (productId.id) {
-      getMainProduct(Number(productId.id));
+      getMainProduct(productId.id);
     }
     if (similarCategory) {
       getSimilarProdutcs(similarCategory);
@@ -36,13 +41,13 @@ export default function DescricaoProduto() {
   return (
     <>
       <section className='bg-black/10 flex flex-col lg:py-16'>
-        <div className='flex flex-col md:flex-row md:m-8 lg:mx-36 items-center'>
+        <div className='grid grid-cols-3 md:flex-row md:m-8 lg:mx-36 items-center'>
           <img
             src={descriptionProduct?.imagem}
             alt=''
-            className='max-h-[190px] md:max-h-[250px] w-full lg:max-w-2xl object-cover'
+            className='max-h-[190px] md:max-h-[250px] w-full lg:max-w-2xl object-cover rounded'
           />
-          <div className='m-4 text-gray flex flex-col gap-2 lg:justify-center'>
+          <div className='m-4 text-gray flex flex-col gap-2 lg:justify-center col-span-2'>
             <h2 className='font-medium text-xl lg:text-5xl'>
               {descriptionProduct?.nome}
             </h2>

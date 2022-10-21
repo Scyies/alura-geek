@@ -1,19 +1,39 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import axios from "axios";
-import { IData, IDataContextType } from "../types/dataTypes";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import axios from 'axios';
+import { IData, IDataContextType } from '../types/dataTypes';
+import { db } from '../auth/firebaseAuth';
+import { collection, onSnapshot, query } from 'firebase/firestore';
 
 const DataContext = createContext<IDataContextType | null>(null);
 
-export default function dataContext({ children }: any) {
-  const [data, setData] = useState<IData[] | undefined>();
+interface IProps {
+  children: ReactNode;
+}
 
-  async function getData() {
-    const response = await axios.get("https://alura-geek-server.vercel.app/produtos");
-    setData(response.data);
+export default function dataContext({ children }: IProps) {
+  const [data, setData] = useState<IData[]>();
+
+  async function getProducts() {
+    const collectionRef = collection(db, 'produtos');
+    const q = query(collectionRef);
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setData(
+        snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id } as IData))
+      );
+    });
+    return unsubscribe;
   }
 
+  console.log(data);
+
   useEffect(() => {
-    getData();
+    getProducts();
   }, []);
   return (
     <DataContext.Provider value={{ data, setData }}>

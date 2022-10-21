@@ -1,26 +1,34 @@
-import axios from 'axios';
+import {
+  addDoc,
+  collection,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { db } from '../auth/firebaseAuth';
 import Button from '../components/Button';
 import Footer from '../components/Footer';
 import Info from '../components/Info';
 import InputWLabel from '../components/InputWLabel';
-import { useData } from '../context/dataContext';
 import { IData } from '../types/dataTypes';
+import { v4 } from 'uuid';
 
 export default function AdicionarNovoProduto() {
   const productId = useParams();
-  const [data, setData] = useState<IData | undefined>();
+  const [data, setData] = useState<IData>();
   const [selector, setSelector] = useState('');
   const navigate = useNavigate();
   const categoria = String(data?.row);
 
-  async function getData() {
-    const response = await axios.get(
-      `https://alura-geek-server.vercel.app/produtos/${productId.id}`
+  async function getData(productId: string) {
+    const docRef = doc(db, 'produtos', productId);
+    const unsubscribe = onSnapshot(docRef, (snapshot) =>
+      setData(snapshot.data() as IData)
     );
-    setData(response.data);
+    return unsubscribe;
   }
 
   async function handleNewProduct(event: React.FormEvent<HTMLFormElement>) {
@@ -33,19 +41,19 @@ export default function AdicionarNovoProduto() {
 
     console.log(input);
 
+    const collectionRef = collection(db, 'produtos');
+
     try {
-      axios
-        .post(`https://alura-geek-server.vercel.app/produtos/novo-produto`, {
-          nome: String(input.nome),
-          descricao: String(input.descricao),
-          imagem: String(input.imagem),
-          preco: String(input.preco),
-          row: Number(input.row),
-        })
-        .then(() => {
-          toast.success('Produto adicionado com sucesso!');
-          navigate('/admin/product-list');
-        });
+      await addDoc(collectionRef, {
+        nome: String(input.nome),
+        descricao: String(input.descricao),
+        imagem: String(input.imagem),
+        preco: String(input.preco),
+        row: Number(input.row),
+        id: v4(),
+      });
+      toast.success('Produto editado com sucesso!');
+      navigate('/admin/product-list');
     } catch (error: any) {
       toast.error(error.message);
       console.error(error);
@@ -60,24 +68,18 @@ export default function AdicionarNovoProduto() {
 
     if (!input) return;
 
+    const docRef = doc(db, 'produtos', productId.id!);
     try {
-      console.log(input);
-
-      axios
-        .put(
-          `https://alura-geek-server.vercel.app/produtos/edit/${productId.id}`,
-          {
-            nome: String(input.nome),
-            descricao: String(input.descricao),
-            imagem: String(input.imagem),
-            preco: String(input.preco),
-            row: Number(input.row),
-          }
-        )
-        .then(() => {
-          toast.success('Produto editado com sucesso!');
-          navigate('/admin/product-list');
-        });
+      const updatedPost = {
+        nome: String(input.nome),
+        descricao: String(input.descricao),
+        imagem: String(input.imagem),
+        preco: String(input.preco),
+        row: Number(input.row),
+      };
+      await updateDoc(docRef, updatedPost);
+      toast.success('Produto editado com sucesso!');
+      navigate('/admin/product-list');
     } catch (error: any) {
       toast.error(error.message);
       console.error(error);
@@ -86,7 +88,7 @@ export default function AdicionarNovoProduto() {
 
   useEffect(() => {
     if (productId.id) {
-      getData();
+      getData(productId.id);
       setSelector(categoria);
     }
   }, [productId, categoria]);
@@ -142,7 +144,7 @@ export default function AdicionarNovoProduto() {
             defaultValue={data && data.descricao}
           ></textarea>
           <Button variant='secondary' type='submit'>
-            Adicionar produto
+            {productId.id ? 'Atualizar produto' : 'Adicionar produto'}
           </Button>
         </form>
       </main>
