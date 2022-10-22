@@ -19,7 +19,7 @@ export default function AdminCard({ imagem, nome, preco, id }: IData) {
   }
 
   return (
-    <div className='relative flex flex-col gap-2'>
+    <div className='relative flex flex-col gap-2 overflow-hidden'>
       <img src={imagem} alt='' className='rounded-md aspect-square' />
       <p className='text-gray font-medium text-sm'>{nome}</p>
       <p className='text-gray font-bold text-base'>{preco}</p>
