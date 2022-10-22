@@ -22,16 +22,13 @@ export default function CartAside({ cartState }: IProps) {
   return (
     <aside
       className={classNames(
-        'fixed justify-between right-2 max-h-[70vh] min-h-[50vh] p-4 flex flex-col bg-white rounded border-4 border-blue z-50 overflow-y-scroll transition-all overflow-x-hidden',
+        'fixed justify-between md:right-2 max-h-[70vh] min-h-[88px] p-4 flex flex-col bg-white rounded-lg  z-50 overflow-y-scroll transition-all overflow-x-hidden',
         {
           'translate-x-[150%]': cartState === false,
           'translate-x-0': cartState === true,
         }
       )}
     >
-      <h2 className='text-blue text-center font-semibold border-b-2 border-blue'>
-        Produtos em seu carrinho
-      </h2>
       {cartItems.length > 0 ? (
         cartItems?.map((item: IData) => (
           <div
@@ -57,9 +54,11 @@ export default function CartAside({ cartState }: IProps) {
           <p className='font-semibold'>Seu carrinho está vazio</p>
         </div>
       )}
-      <Button variant='secondary' type='button'>
-        Continuar
-      </Button>
+      {cartItems.length > 0 && (
+        <Button variant='secondary' type='button'>
+          Continuar
+        </Button>
+      )}
     </aside>
   );
 }

@@ -49,7 +49,7 @@ export default function Header() {
             <span className='text-blue'>
               <ShoppingCartSimple size={24} weight='bold' />
             </span>
-            <span className='absolute -bottom-3 -right-1 flex items-center px-1 aspect-square bg-blue rounded-full text-white text-xs'>
+            <span className='absolute -bottom-1 -right-2 flex items-center px-1 aspect-square bg-blue rounded-full text-white text-xs'>
               {cartItems.length}
             </span>
           </div>

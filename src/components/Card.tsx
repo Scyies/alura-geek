@@ -2,11 +2,17 @@ import { IData, IDataContextType } from '../types/dataTypes';
 import { Link } from 'react-router-dom';
 import { ShoppingCartSimple } from 'phosphor-react';
 import { useData } from '../context/dataContext';
+import { toast } from 'react-toastify';
 
 export default function Card({ imagem, nome, preco, id }: IData) {
-  const { setCartItems } = useData() as IDataContextType;
+  const { cartItems, setCartItems } = useData() as IDataContextType;
 
-  function addItemToCart() {
+  function addItemToCart(id: string) {
+    const repeatedItems = cartItems.filter((item) => item.id === id);
+
+    if (repeatedItems.length > 0)
+      return toast.error('Esse produto já foi adicionado!');
+
     setCartItems((prev) => [...prev, { nome, imagem, preco, id }]);
   }
   return (
@@ -18,7 +24,10 @@ export default function Card({ imagem, nome, preco, id }: IData) {
         <Link to={`/description/${id}`}>
           <p className='text-blue font-bold text-sm'>Ver produto</p>
         </Link>
-        <span className='cursor-pointer text-blue' onClick={addItemToCart}>
+        <span
+          className='cursor-pointer text-blue'
+          onClick={() => addItemToCart(id!)}
+        >
           <ShoppingCartSimple size={24} weight='bold' />
         </span>
       </div>
