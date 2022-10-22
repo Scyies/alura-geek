@@ -3,12 +3,12 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDZssnOh-PxdgPrAewbpby3ulbyVqitqWY',
-  authDomain: 'alura-geek-react.firebaseapp.com',
-  projectId: 'alura-geek-react',
-  storageBucket: 'alura-geek-react.appspot.com',
-  messagingSenderId: '639589321517',
-  appId: '1:639589321517:web:5b6ace6005f48e45f261a4',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 export const app = initializeApp(firebaseConfig);

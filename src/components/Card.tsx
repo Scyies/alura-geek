@@ -1,4 +1,3 @@
-import React from 'react';
 import { IData, IDataContextType } from '../types/dataTypes';
 import { Link } from 'react-router-dom';
 import { ShoppingCartSimple } from 'phosphor-react';

@@ -38,27 +38,27 @@ export default function Header() {
           />
         </Link>
         <div
-          className={classNames('order-2 md:order-3', {
+          className={classNames('flex gap-4 items-center order-2 md:order-3', {
             'hidden md:flex': openSearch === true,
           })}
         >
+          <div
+            className='relative cursor-pointer'
+            onClick={() => setCartOpen(!cartOpen)}
+          >
+            <span className='text-blue'>
+              <ShoppingCartSimple size={24} weight='bold' />
+            </span>
+            <span className='absolute -bottom-3 -right-1 flex items-center px-1 aspect-square bg-blue rounded-full text-white text-xs'>
+              {cartItems.length}
+            </span>
+          </div>
           {!user ? (
             <Link to={'/login'}>
               <Button variant='primary'>Login</Button>
             </Link>
           ) : (
             <div className='flex gap-2'>
-              <div
-                className='relative cursor-pointer'
-                onClick={() => setCartOpen(!cartOpen)}
-              >
-                <span className='text-blue'>
-                  <ShoppingCartSimple size={24} weight='bold' />
-                </span>
-                <span className='absolute -bottom-3 -right-1 flex items-center px-1 aspect-square bg-blue rounded-full text-white text-xs'>
-                  {cartItems.length}
-                </span>
-              </div>
               <Link to={'/admin/product-list'}>
                 <span className='text-blue'>
                   <User size={24} weight='bold' />
