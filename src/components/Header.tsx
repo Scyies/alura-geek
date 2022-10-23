@@ -14,6 +14,7 @@ import Info from './Info';
 import CartAside from './CartAside';
 import { useData } from '../context/dataContext';
 import { IDataContextType } from '../types/dataTypes';
+import { useInView } from 'react-intersection-observer';
 
 export default function Header() {
   const [openSearch, setOpenSearch] = useState<boolean>(false);
@@ -22,9 +23,14 @@ export default function Header() {
   const [cartOpen, setCartOpen] = useState(false);
   const { cartItems } = useData() as IDataContextType;
 
+  const { ref, inView, entry } = useInView();
+
   return (
     <>
-      <header className='m-4 md:mx-8 lg:mx-36 flex items-center justify-between'>
+      <header
+        className='m-4 md:mx-8 lg:mx-36 flex items-center justify-between'
+        ref={ref}
+      >
         <Link to={'/'}>
           <img
             src={openSearch ? cLogo : Logo}
@@ -43,7 +49,11 @@ export default function Header() {
           })}
         >
           <div
-            className='relative cursor-pointer'
+            className={classNames('cursor-pointer z-50', {
+              'fixed bottom-5 right-3 p-1 rounded-full bg-white shadow-md animate-cartBottom':
+                inView === false,
+              relative: inView,
+            })}
             onClick={() => setCartOpen(!cartOpen)}
           >
             <span className='text-blue'>

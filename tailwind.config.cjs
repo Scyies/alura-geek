@@ -10,6 +10,15 @@ module.exports = {
         gray: '#464646',
         cyan: '#20B8FA',
       },
+      animation: {
+        cartBottom: 'cartBottom .5s forwards',
+      },
+      keyframes: {
+        cartBottom: {
+          '0%': { transform: 'translateY(200%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
     },
   },
   plugins: [],
