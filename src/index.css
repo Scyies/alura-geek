@@ -3,8 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   @apply bg-white;
   font-family: 'Raleway', sans-serif;
+}
+
+#scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+#scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -113,7 +113,7 @@ export default function Header() {
           />
         </div>
       </header>
-      <CartAside cartState={cartOpen} />
+      <CartAside cartState={cartOpen} inView={inView} />
       {search.length > 0 ? <Search filter={search} /> : <Outlet />}
       <Info />
       <Footer />

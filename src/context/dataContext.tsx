@@ -19,6 +19,10 @@ export default function dataContext({ children }: IProps) {
   const [data, setData] = useState<IData[]>();
   const [cartItems, setCartItems] = useState<IData[]>([]);
 
+  const storedCartItemsInfo = sessionStorage.getItem('cartItems');
+  const storedCartItems =
+    storedCartItemsInfo?.length! > 0 && JSON.parse(storedCartItemsInfo!);
+
   async function getProducts() {
     const collectionRef = collection(db, 'produtos');
     const q = query(collectionRef);
@@ -36,7 +40,11 @@ export default function dataContext({ children }: IProps) {
 
   useEffect(() => {
     getProducts();
+    if (storedCartItems) setCartItems(storedCartItems);
   }, []);
+  useEffect(() => {
+    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems.length]);
   return (
     <DataContext.Provider
       value={{

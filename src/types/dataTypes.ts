@@ -1,4 +1,5 @@
 import { UserCredential, UserInfo } from 'firebase/auth';
+import { Dispatch } from 'react';
 
 export interface IData {
   descricao?: string;
@@ -23,4 +24,22 @@ export interface IAuthContext {
   user?: UserInfo;
   logIn?: (email: string, password: string) => Promise<UserCredential>;
   logOut?: () => Promise<void>;
+}
+
+export interface ICartCard {
+  item: IData;
+  removeCartItems: (id: string) => void;
+  setSelectedItems: Dispatch<React.SetStateAction<ISelectedItems[]>>;
+  selectedItems: ISelectedItems[];
+}
+
+export interface ITotalValue {
+  preco: number;
+  nome: string;
+}
+
+export interface ISelectedItems {
+  nome: string;
+  preco: string;
+  id: string;
 }
