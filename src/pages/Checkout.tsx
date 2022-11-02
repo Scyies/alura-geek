@@ -18,8 +18,6 @@ export function Checkout() {
         }, 0)
       : null;
 
-  console.log(selectedItems);
-
   function removeCartItem(id: string) {
     setCartItems((prev) => prev.filter((obj) => obj.id !== id));
   }
