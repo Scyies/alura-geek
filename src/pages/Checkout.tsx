@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import { CheckoutCard } from '../components/CheckoutCard';
@@ -16,7 +16,7 @@ export function Checkout() {
       ? selectedItems.reduce((accumulator, object) => {
           return accumulator + Number(object.preco);
         }, 0)
-      : null;
+      : 'Você não tem nenhum produto no carrinho';
 
   function removeCartItem(id: string) {
     setCartItems((prev) => prev.filter((obj) => obj.id !== id));
@@ -26,6 +26,10 @@ export function Checkout() {
     setCartItems([]);
     navigate('/');
   }
+
+  useEffect(() => {
+    setSelectedItems(cartItems as ISelectedItems[]);
+  }, [cartItems.length]);
 
   return (
     <main className='min-h-[calc(100vh-480px)] flex flex-col gap-4 p-4 md:p-6'>
