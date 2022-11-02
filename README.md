@@ -14,9 +14,48 @@ O Desafio tem a duração de 4 semanas, sendo organizado da seguinte maneira:
 - Semana 1: Desenvolvimento das estrutras e estilizações.
 - Semana 2: Implementação de modificações dinâmicas do HTML.
 - Semana 3: Validação dos formulários (login, contato e cadastro de produtos), criação de rotas, controllers e implementação do banco de dados.
-- Semana 4: Finalização do projeto com cadastro dos produtos no banco de dados e funcionaldiade de adicionar/editar produtos.
+- Semana 4: Finalização do projeto com cadastro dos produtos no banco de dados e funcionalidade de adicionar/editar produtos.
 
 Dentro do projeto, para acessar a área de administrador e editar, adicionar ou excluir novos produtos: Login: teste@teste.com, Senha: teste123.
+
+## Tecnologias
+
+- [React](https://reactjs.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## Adicionais
+
+Além do proposto pelo desafio, resolvi me desafiar mais ainda e ir além!
+
+Entre as implementações novas estão:
+
+- Carrinho de produtos
+- Página de chekout dos produtos
+- Navegação para usuários logados (acesso à área de administração de logout)
+- Modal para visualização dos produtos já selecionados
+- Implementação de rotas protegidas, para que aqueles que não estiverem logados não possam alterar os produtos
+- Todos os produtos do carrinho são salvos em sessionStorage para evitar perda em caso de reload da página
+
+## Como usar
+
+<!-- Example:  -->
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+Para clonar e rodar essa aplicação, você vai precisar de: [Git](https://git-scm.com) e [Node.js](https://nodejs.org/en/download/) (que traz o [npm](http://npmjs.com) integrado) instalados no seu computador. E usar as seguintes linhas de comando:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/Scyies/alura-geek
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm run dev
+```
 
 ---
 
@@ -39,3 +78,40 @@ The challenge lasts for 4 weeks with the following goals:
 - Week 4: Project conclusion, products registration on the database and new product/edition functionality.
 
 Inside the site, if you want to enter the administration area to edit, add or delete products, the Login is: teste@teste.com, and password: teste123.
+
+## Built With
+
+- [React](https://reactjs.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## Addons
+
+To go even further beyond I decided to challenge myself and develop new features to this project.
+
+Those features are:
+
+- Shopping cart for the products
+- Checkout page
+- Protected routes for the administration sections
+- Modal for visualization of selected products
+- Navigation menu for logged in users
+- All products added to the cart are saved on sessionStorage to prevent loss due to reload
+
+## How To Use
+
+<!-- Example:  -->
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+$ git clone https://github.com/Scyies/alura-geek
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm run dev
+```
