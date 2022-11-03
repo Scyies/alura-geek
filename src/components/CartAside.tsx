@@ -21,7 +21,7 @@ export default function CartAside({ cartState, inView }: IProps) {
     <aside
       id='scrollbar-hide'
       className={classNames(
-        'fixed justify-between md:right-2 max-h-[50vh] min-h-[88px] p-4 flex flex-col bg-white rounded-lg  z-50 overflow-y-scroll transition-all overflow-x-hidden',
+        'fixed justify-between md:right-2 max-h-[50vh] min-h-[88px] p-4 flex flex-col bg-white rounded-lg  z-50 overflow-y-scroll transition-all overflow-x-hidden shadow-md',
         {
           'translate-x-[150%]': cartState === false,
           'translate-x-0': cartState === true,

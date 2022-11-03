@@ -1,6 +1,6 @@
 import { X } from 'phosphor-react';
 import { useEffect, useState } from 'react';
-import { ICartCard } from '../types/dataTypes';
+import { ICartCard, ISelectedItems } from '../types/dataTypes';
 
 export function CheckoutCard({
   item,
@@ -9,6 +9,10 @@ export function CheckoutCard({
   selectedItems,
 }: ICartCard) {
   const [quantity, setQuantity] = useState<number>(1);
+
+  const storedCartItemsInfo = sessionStorage.getItem('cartItems');
+  const storedCartItems =
+    storedCartItemsInfo?.length! > 0 && JSON.parse(storedCartItemsInfo!);
 
   const updatedPrice = Number(item.preco) * quantity;
 
@@ -23,6 +27,10 @@ export function CheckoutCard({
     }
     updateValue();
   }, [quantity]);
+
+  useEffect(() => {
+    if (storedCartItems) setSelectedItems(storedCartItems as ISelectedItems[]);
+  }, [storedCartItemsInfo]);
 
   return (
     <div className='relative flex gap-2 my-2 bg-black/10 p-1 rounded transition-all'>
